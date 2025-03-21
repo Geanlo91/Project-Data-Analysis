@@ -28,18 +28,27 @@ def compute_coherence_scores(model_type, data_matrix, feature_names, texts, dict
             [feature_names[i] for i in topic.argsort()[-10:][::-1]]
             for topic in model.components_
         ]
+        top_word_ids = [
+            [dictionary.token2id[word] for word in topic if word in dictionary.token2id]
+            for topic in top_words
+        ]
         
-        cm = CoherenceModel(topics=top_words, texts=texts, dictionary=dictionary, coherence='c_v')
-        score = cm.get_coherence()
-        scores.append(score)
+        if __name__ == '__main__':
+            coherence_model = CoherenceModel(topics=top_word_ids, texts=texts, dictionary=dictionary, coherence='c_v')
+            coherence_score = coherence_model.get_coherence()
+            print(f"Coherence Score for {k} topics: {coherence_score}")
     
     return scores
 
 # Step 3: Run for a range of topics
 topic_range = list(range(2, 11))  # From 2 to 10
 
-lda_scores = compute_coherence_scores('lda', count_data.iloc[:, 1:], count_data.columns[1:], tokenized_texts, id2word, topic_range)
-nmf_scores = compute_coherence_scores('nmf', tfidf_data.iloc[:, 1:], tfidf_data.columns[1:], tokenized_texts, id2word, topic_range)
+lda_scores = compute_coherence_scores('lda', count_data.iloc[:, 2:], count_data.columns[1:], tokenized_texts, id2word, topic_range)
+nmf_scores = compute_coherence_scores('nmf', tfidf_data.iloc[:, 2:], tfidf_data.columns[1:], tokenized_texts, id2word, topic_range)
+
+print(f"Topic Range: {topic_range}")  # Should print 9 values
+print(f"LDA Scores: {lda_scores}") 
+print(f"NMF Scores: {nmf_scores}")
 
 # Step 4: Plot the scores
 plt.figure(figsize=(10, 6))
