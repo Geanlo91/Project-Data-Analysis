@@ -22,6 +22,12 @@ def preprocess(data):
           sw = set(stopwords.words('english'))
           data['Reports'] = data['Reports'].apply(lambda x: ' '.join([word for word in x.split() if word not in sw]))
 
+          #Removeing all numbers
+          data['Reports'] = data['Reports'].apply(lambda x: re.sub(r'\d+', '', x))
+
+          #Removing all extra spaces
+          data['Reports'] = data['Reports'].apply(lambda x: re.sub(r'\s+', ' ', x))
+
           #Applying Lemmatization
           lemmatizer = WordNetLemmatizer()
           data['Reports'] = data['Reports'].apply(lambda x: ' '.join([lemmatizer.lemmatize(word) for word in x.split()]))
@@ -29,12 +35,14 @@ def preprocess(data):
           return data
 try:
     data = preprocess(data)
-    print(data.head())
+    
 except Exception as e:
     print(f"An error occured during preprocessing: {e}")      
 
 # Saving the preprocessed data
 data.to_csv('preprocessed_data.csv', index=False)
+print("Preprocessed data saved to preprocessed_data.csv")
+print(data.head())
 
 
 

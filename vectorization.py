@@ -17,5 +17,10 @@ tfidf_df = pd.DataFrame(tfidf_matrix.toarray(), columns=tfidf_vectorizer.get_fea
 #print the dataframes
 print("count vectorizer representation:\n", count_df.head())
 print("tfidf vectorizer representation:\n", tfidf_df.head())
+print("same feautures:",set(count_df.columns) == set(tfidf_df.columns))
+
+#save the vectorized data
+count_df.to_csv('count_data.csv', index=False)
+tfidf_df.to_csv('tfidf_data.csv', index=False)
 
 
