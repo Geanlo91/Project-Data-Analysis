@@ -39,6 +39,19 @@ def plot_top_words_bar(model, feature_names, title_prefix, n_words=10):
         plt.tight_layout()
         plt.show()
 
-# Generate bar charts
-plot_top_words_bar(lda_model, count_data.columns[1:], "LDA")
-plot_top_words_bar(nmf_model, tfidf_data.columns[1:], "NMF")
+
+
+#Topic count for LDA and NMF
+data = pd.read_csv('data_with_topics.csv')
+data['LDA_Topic_Label'].value_counts().plot(kind='bar', title='LDA Topic Distribution')
+plt.xlabel('Topic name')
+plt.ylabel('Count')
+plt.show()
+
+
+data['NMF_Topic_Label'].value_counts().plot(kind='bar', title='NMF Topic Distribution')
+plt.xlabel('Topic Name')
+plt.ylabel('Count')
+plt.show()
+
+
