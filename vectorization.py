@@ -1,7 +1,6 @@
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 import pandas as pd
 import matplotlib.pyplot as plt
-from sklearn.decomposition import PCA
 
 data = pd.read_csv('preprocessed_data.csv')
 
@@ -40,29 +39,6 @@ plt.title('Top 20 Words by TF-IDF Vectorization')
 plt.gca().invert_yaxis()
 plt.tight_layout()
 
-plt.tight_layout()
-plt.show()
-
-
-#comparing using PCA
-pca = PCA(n_components=2)
-bow_2d = pca.fit_transform(count_matrix.toarray())
-tfidf_2d = pca.fit_transform(tfidf_matrix.toarray())
-
-plt.figure(figsize=(12, 6))
-plt.subplot(1, 2, 1)
-plt.scatter(bow_2d[:, 0], bow_2d[:, 1], alpha=0.5)
-plt.title('PCA of Count Vectorization')
-plt.xlabel('PCA Component 1')
-plt.ylabel('PCA Component 2')
-plt.grid(True)
-
-plt.subplot(1, 2, 2)
-plt.scatter(tfidf_2d[:, 0], tfidf_2d[:, 1], alpha=0.5)
-plt.title('PCA of TF-IDF Vectorization')
-plt.xlabel('PCA Component 1')
-plt.ylabel('PCA Component 2')
-plt.grid(True)
 plt.tight_layout()
 plt.show()
 
