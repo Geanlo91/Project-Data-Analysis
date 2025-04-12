@@ -3,12 +3,19 @@ This project uses Natural Language Processing (NLP) and unsupervised machine lea
 The goal is to uncover hidden themes within the texts and gain insight into student concerns, experiences, and needs.
 
 ## Project Structure
+
 ├── Datasetprojpowerbi.csv         # Original dataset
+
 ├── preprocessed_data.csv          # Cleaned and lemmatized text
+
 ├── count_data.csv                 # Count Vectorized representation (Bag-of-Words)
+
 ├── tfidf_data.csv                 # TF-IDF representation
+
 ├── data_with_topics.csv           # Data annotated with topic numbers and labels
+
 ├── topic_extraction.py            # Main code for topic modeling and visualization
+
 └── README.md                      # Project documentation
 
 ## Features
